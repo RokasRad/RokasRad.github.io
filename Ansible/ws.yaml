@@ -1,0 +1,85 @@
+---
+ - hosts: Webserver
+   become: yes
+   tasks:
+   - name: Update debian
+     apt: update_cache=yes
+   - name: Install apache2
+     apt: name=apache2 update_cache=yes state=latest
+   - name: Add specified repository into sources list
+     ansible.builtin.apt_repository:
+        repo: deb http://ftp.lt.debian.org/debian stretch main 
+        state: present
+   - name: Install php mods
+     apt: name=libapache2-mod-php7.0 state=present
+   - name: Delete static files from www
+     file:
+        path: /var/www/html/index.html
+        state: absent
+   - name: Sendig index.html
+     copy:
+        src: index.html
+        dest: /var/www/html/index.html
+   - name: Sending style_index.html
+     copy:
+        src: style_index.css
+        dest: /var/www/html/style_index.css
+   - name: Create directory for images
+     file:
+        path: /var/www/html/images
+        state: directory
+   - name: Sending image \1.
+     copy:
+        src: test.png
+        dest: /var/www/html/images/test.png
+   - name: Sending image \2.
+     copy:
+        src: team.png
+        dest: /var/www/html/images/team.png
+   - name: Sending image \3.
+     copy:
+        src: share.png
+        dest: /var/www/html/images/share.png
+
+   - name: Sending blog.html
+     copy:
+        src: blog.html
+        dest: /var/www/html/blog.html
+
+   - name: Sending style_blog.css
+     copy:
+        src: style_blog.css
+        dest: /var/www/html/style_blog.css
+
+   - name: Sending services.html
+     copy:
+        src: services.html
+        dest: /var/www/html/services.html
+
+   - name: Sending style_services.css
+     copy:
+        src: style_services.css
+        dest: /var/www/html/style_services.css
+
+   - name: Sending aboutus.html
+     copy:
+        src: aboutus.html
+        dest: /var/www/html/aboutus.html
+
+   - name: Sending style_aboutus.css
+     copy:
+        src: style_aboutus.css
+        dest: /var/www/html/style_aboutus.css
+
+   - name: Sending contact.html
+     copy:
+        src: contact.html
+        dest: /var/www/html/contact.html
+
+   - name: Sending style_contact.css
+     copy:
+        src: style_contact.css
+        dest: /var/www/html/style_contact.css
+
+
+
