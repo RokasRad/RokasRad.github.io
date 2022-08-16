@@ -1,8 +1,8 @@
 #!/bin/bash
 # This script creates WebServer VM and calls asnible to play yaml playbook
 
-CUSER=ryam6330
-CPASS=isas1223
+CUSER=
+CPASS=
 CENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
 
 CVMREZ=$(onetemplate instantiate "debian8-for-virtualization" --name "webserver-vm"  --user $CUSER --password $CPASS  --endpoint $CENDPOINT)
